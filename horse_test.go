@@ -22,25 +22,58 @@ func setUp() {
 	}
 }
 
-func TestHorseClone(t *testing.T) {
+func TestHorseCloneName(t *testing.T) {
+	h := Horse{}
 
-	h2 := Horse{}
+	if h.Name == horse.Name {
+		t.Error("Name should not be the same")
+	}
 
-	h2.Clone(horse)
+	h.Clone(horse)
 
-	if h2.Name != horse.Name {
+	if h.Name != horse.Name {
 		t.Error("Name should be the same")
 	}
+}
 
-	if h2.Line != horse.Line {
+func TestHorseCloneLine(t *testing.T) {
+	h := Horse{}
+
+	if h.Line == horse.Line {
+		t.Error("Line should not be the same")
+	}
+
+	h.Clone(horse)
+
+	if h.Line != horse.Line {
 		t.Error("Line should be the same")
 	}
+}
 
-	if h2.Position != horse.Position {
-		t.Error("Position should be the same")
+func TestHorseClonePosition(t *testing.T) {
+	h := Horse{}
+
+	if h.Position == horse.Position {
+		t.Error("Position should not be the same")
 	}
 
-	if h2.IsWinner != horse.IsWinner {
+	h.Clone(horse)
+
+	if h.Position != horse.Position {
+		t.Error("Position should be the same")
+	}
+}
+
+func TestHorseCloneIsWinner(t *testing.T) {
+	h := Horse{}
+
+	if h.IsWinner == horse.IsWinner {
+		t.Error("IsWinner should not be the same")
+	}
+
+	h.Clone(horse)
+
+	if h.IsWinner != horse.IsWinner {
 		t.Error("IsWinner should be the same")
 	}
 }
