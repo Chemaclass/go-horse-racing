@@ -1,10 +1,12 @@
-package main
+package src
 
 import (
 	"math/rand"
 	"sync"
 	"time"
 )
+
+const maxSleepDelay = 500
 
 func StartRace(
 	board [][]*Horse,
@@ -47,7 +49,7 @@ func startHorseRunning(
 }
 
 func sleepRandomMilliseconds() {
-	randomDuration := time.Duration(rand.Intn(milliDelay))
+	randomDuration := time.Duration(rand.Intn(maxSleepDelay))
 	time.Sleep(time.Millisecond * randomDuration)
 }
 

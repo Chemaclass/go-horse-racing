@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
 
-const milliDelay = 350
+	. "github.com/Chemaclass/go-horse-racing/src"
+)
 
 func main() {
 	defer func() { ShowCursor() }()

@@ -1,4 +1,4 @@
-package main
+package src
 
 import (
 	"bytes"
@@ -8,10 +8,12 @@ import (
 	"time"
 )
 
+const renderDelay = 350
+
 func RenderGame(board [][]*Horse) {
 	go func() {
 		for {
-			time.Sleep(milliDelay * time.Millisecond)
+			time.Sleep(renderDelay * time.Millisecond)
 			RenderRaceBoard(board)
 		}
 	}()

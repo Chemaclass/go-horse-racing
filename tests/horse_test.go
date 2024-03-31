@@ -3,6 +3,8 @@ package main
 import (
 	"os"
 	"testing"
+
+	. "github.com/Chemaclass/go-horse-racing/src"
 )
 
 var horse *Horse
