@@ -6,67 +6,15 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
-	"os/signal"
 	"sync"
 	"time"
 )
 
 const milliDelay = 350
 
-var once sync.Once
-
-var horseNames = [20][2]string{
-	{"Alloping", "Giggles"},
-	{"A-lot", "Gallop"},
-	{"BoJack", "Jack"},
-	{"Baroness", "Belle"},
-	{"Bucksnort", "Buckaroo"},
-	{"Count", "Clopperstein"},
-	{"Duchess", "Whirlwind"},
-	{"Lady", "Hoofers"},
-	{"Gallopalot", "Gallopadore"},
-	{"Hoof", "Hearted"},
-	{"Marquis", "Clipclapper"},
-	{"Mr.", "Trot-a-lot"},
-	{"Neigh", "Sayer"},
-	{"Princess", "Neight"},
-	{"Professor", "Neighsley"},
-	{"Sir", "Trotsworth"},
-	{"Sugar", "Cube"},
-	{"Whinny", "McWhinerson"},
-	{"Thunder", "Hooves"},
-	{"Zomby", "McStompface"},
-}
-
-type Horse struct {
-	Name     string // The name of the horse
-	Line     int    // The competition line
-	Position int    // The position in its line
-	IsWinner bool   // A flag to know if it's the winner
-}
-
-func (h *Horse) Clone(other *Horse) {
-	h.Name = other.Name
-	h.Line = other.Line
-	h.Position = other.Position
-	h.IsWinner = other.IsWinner
-}
-
-func (h Horse) Letter() string {
-	return fmt.Sprintf("%c", h.Name[0])
-}
-
-func (h Horse) IsFound() bool {
-	return h.Name != ""
-}
-
-func (h Horse) String() string {
-	return fmt.Sprintf("%s (line:%d)", h.Name, h.Line)
-}
-
 func main() {
-	defer func() { showCursor() }()
-	setUpBoard()
+	defer func() { ShowCursor() }()
+	SetUpBoard()
 
 	const lines, lineLength = 12, 30
 	board := generateRaceBoard(lines, lineLength)
@@ -78,28 +26,6 @@ func main() {
 	// render one last time to ensure the latest board state
 	renderRaceBoard(board)
 	renderWinner(winner)
-}
-
-func setUpBoard() {
-	hideCursor()
-	// Force call showCursor() after Ctrl+C
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt)
-	go func() {
-		for sig := range c {
-			showCursor()
-			fmt.Sprintln(sig.String())
-			os.Exit(1)
-		}
-	}()
-}
-
-func hideCursor() {
-	fmt.Print("\x1b[?25l")
-}
-
-func showCursor() {
-	fmt.Print("\x1b[?25h")
 }
 
 func generateRaceBoard(lines, lineLength int) [][]*Horse {
@@ -117,8 +43,8 @@ func generateRaceBoard(lines, lineLength int) [][]*Horse {
 }
 
 func generateName() string {
-	name := horseNames[rand.Intn(len(horseNames))][0]
-	surname := horseNames[rand.Intn(len(horseNames))][1]
+	name := HorseNames[rand.Intn(len(HorseNames))][0]
+	surname := HorseNames[rand.Intn(len(HorseNames))][1]
 
 	return name + " " + surname
 }
@@ -256,6 +182,8 @@ func moveHorseOnePos(
 		break
 	}
 }
+
+var once sync.Once
 
 func declareWinner(
 	won chan bool,
