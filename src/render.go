@@ -11,15 +11,15 @@ import (
 const renderDelay = 200
 
 func RenderGame(board [][]*Horse) {
-	go func() {
-		for {
-			time.Sleep(renderDelay * time.Millisecond)
-			RenderRaceBoard(board, nil)
-		}
-	}()
+	for {
+		time.Sleep(renderDelay * time.Millisecond)
+		RenderRaceBoard(board, nil)
+	}
 }
 
 func RenderRaceBoard(board [][]*Horse, winner *Horse) {
+	// use a "string buffer" to save the whole board state
+	// so we can later use one IO call to render it
 	var buffer bytes.Buffer
 	buffer.WriteString("\n")
 	for line := range board {

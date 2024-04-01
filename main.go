@@ -14,15 +14,15 @@ func main() {
 	defer func() { ShowCursor() }()
 	SetUpBoard()
 
-	const linesCount, lineLength = 12, 25
+	const lines, lineLength = 12, 30
 
-	board := NewRaceBoard(linesCount, lineLength)
-	RenderGame(board)
+	board := NewRaceBoard(lines, lineLength)
+	go RenderGame(board)
 
 	winnerChan := make(chan Horse)
 	for line := range board {
 		// each horse will be moved in different processes
-		go startHorseRunning(board, line, winnerChan)
+		go startRuningHorseInLine(board, line, winnerChan)
 	}
 
 	winner := <-winnerChan // wait until one horse reaches the end
@@ -33,7 +33,7 @@ func main() {
 	fmt.Printf("# Winner: %s\n", winner)
 }
 
-func startHorseRunning(board [][]*Horse, line int, winnerChan chan Horse) {
+func startRuningHorseInLine(board [][]*Horse, line int, winnerChan chan Horse) {
 	for {
 		select {
 		case <-winnerChan: // check if another horse finished
@@ -53,7 +53,7 @@ func moveHorseOnePos(board [][]*Horse, line int, winnerChan chan Horse) {
 		}
 		// here we identify that there is a horse in
 		// the following column, so we move it to the
-		// current column, and we set `nil` the other one
+		// current column, and we set `nil`` the other one
 		board[line][col] = board[line][col-1]
 		board[line][col-1] = nil
 
