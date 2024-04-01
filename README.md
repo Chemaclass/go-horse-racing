@@ -4,9 +4,9 @@ Read original idea here: [Learning concurrency in Golang](https://chemaclass.com
 
 ### A horse racing emulator
 
-I remember building a similar game in Java (back in 2012) when I was learning multithreading, and I thought it would be a great opportunity to do it again with the modern Go language.
+I remember building a similar game in Java when I was learning multithreading ten years ago… let’s use this opportunity to do it again with modern Go.
 
-I built a terminal game emulator that mimics one horse racing. Each horse is a goroutine that runs in a shared bidimensional matrix. Once a horse reaches the end, it is notified to a shared channel between all other horses -running in different processes- and they all stop, showing in the terminal the winner of the race.
+I built a terminal game emulator that mimics one horse racing. Each horse is a goroutine that runs in a shared bidimensional matrix. Once a horse reaches the end, it notifies the shared channel between all other horses –running in different processes– and they all stop, showing in the terminal the winner of the race.
 
 ## Run the game
 

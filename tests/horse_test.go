@@ -17,10 +17,8 @@ func TestMain(m *testing.M) {
 
 func setUp() {
 	horse = &Horse{
-		Name:     "Spirit",
-		Line:     2,
-		Position: 11,
-		IsWinner: true,
+		Name: "Spirit",
+		Line: 2,
 	}
 }
 
@@ -49,34 +47,6 @@ func TestHorseCloneLine(t *testing.T) {
 
 	if h.Line != horse.Line {
 		t.Error("Line should be the same")
-	}
-}
-
-func TestHorseClonePosition(t *testing.T) {
-	h := Horse{}
-
-	if h.Position == horse.Position {
-		t.Error("Position should not be the same")
-	}
-
-	h.Clone(horse)
-
-	if h.Position != horse.Position {
-		t.Error("Position should be the same")
-	}
-}
-
-func TestHorseCloneIsWinner(t *testing.T) {
-	h := Horse{}
-
-	if h.IsWinner == horse.IsWinner {
-		t.Error("IsWinner should not be the same")
-	}
-
-	h.Clone(horse)
-
-	if h.IsWinner != horse.IsWinner {
-		t.Error("IsWinner should be the same")
 	}
 }
 

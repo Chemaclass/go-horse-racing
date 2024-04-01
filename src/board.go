@@ -7,9 +7,8 @@ func NewRaceBoard(lines, lineLength int) [][]*Horse {
 	for line := range board {
 		board[line] = make([]*Horse, lineLength)
 		board[line][0] = &Horse{
-			Name:     generateHorseName(),
-			Position: 0,
-			Line:     line,
+			Name: generateHorseName(),
+			Line: line,
 		}
 	}
 	return board

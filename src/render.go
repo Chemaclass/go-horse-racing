@@ -69,7 +69,7 @@ func renderRacePosition(
 	current.Clone(board[line][col])
 
 	if winner != nil && current.Name == winner.Name {
-		removeChars(buffer, current.Position+1)
+		removeChars(buffer, col+1)
 		for range board[line] {
 			buffer.WriteString("-")
 		}

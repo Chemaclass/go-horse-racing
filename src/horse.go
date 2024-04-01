@@ -26,15 +26,13 @@ var HorseNames = [20][2]string{
 }
 
 type Horse struct {
-	Name     string // The name of the horse
-	Line     int    // The competition line
-	Position int    // The position in its line
+	Name string // The name of the horse
+	Line int    // The competition line
 }
 
 func (h *Horse) Clone(other *Horse) {
 	h.Name = other.Name
 	h.Line = other.Line
-	h.Position = other.Position
 }
 
 func (h Horse) Letter() string {

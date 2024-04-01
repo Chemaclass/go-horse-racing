@@ -14,7 +14,7 @@ func main() {
 	defer func() { ShowCursor() }()
 	SetUpBoard()
 
-	const linesCount, lineLength = 12, 30
+	const linesCount, lineLength = 12, 25
 
 	board := NewRaceBoard(linesCount, lineLength)
 	RenderGame(board)
@@ -52,13 +52,12 @@ func moveHorseOnePos(board [][]*Horse, line int, winnerChan chan Horse) {
 			continue
 		}
 		// here we identify that there is a horse in
-		// the following position, so we move it to the
-		// current pos, and we set nil in the other one
+		// the following column, so we move it to the
+		// current column, and we set `nil` the other one
 		board[line][col] = board[line][col-1]
-		board[line][col].Position++
 		board[line][col-1] = nil
 
-		if board[line][col].Position+1 == cols {
+		if col+1 == cols {
 			winnerChan <- *board[line][col]
 		}
 		break
