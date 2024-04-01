@@ -39,10 +39,6 @@ func (h *Horse) Letter() string {
 	return fmt.Sprintf("%c", h.Name[0])
 }
 
-func (h *Horse) IsFound() bool {
-	return h.Name != ""
-}
-
 func (h *Horse) String() string {
 	return fmt.Sprintf("%s (line:%d)", h.Name, h.Line)
 }

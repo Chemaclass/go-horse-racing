@@ -61,9 +61,3 @@ func TestHorseLetter(t *testing.T) {
 		t.Error("Letter() wrong")
 	}
 }
-
-func TestHorseIsFound(t *testing.T) {
-	if !horse.IsFound() {
-		t.Error("IsFound() should be true")
-	}
-}
