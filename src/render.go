@@ -51,7 +51,7 @@ func renderRaceLine(
 	}
 	buffer.WriteString(fmt.Sprintf("| %s", current.Name))
 
-	if winner != nil && current.Name == winner.Name {
+	if current.Equals(winner) {
 		buffer.WriteString(" [Won!]")
 	}
 	buffer.WriteString("\n")
@@ -70,7 +70,7 @@ func renderRacePosition(
 
 	current := board[line][col]
 
-	if winner != nil && current.Name == winner.Name {
+	if current.Equals(winner) {
 		removeChars(buffer, col+1)
 		for range board[line] {
 			buffer.WriteString("-")

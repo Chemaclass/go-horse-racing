@@ -34,6 +34,12 @@ func (h *Horse) Letter() string {
 	return fmt.Sprintf("%c", h.Name[0])
 }
 
+func (h *Horse) Equals(other *Horse) bool {
+	return other != nil &&
+		h.Line == other.Line &&
+		h.Name == other.Name
+}
+
 func (h *Horse) String() string {
 	return fmt.Sprintf("%s (line:%d)", h.Name, h.Line)
 }
