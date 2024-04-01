@@ -35,14 +35,14 @@ func (h *Horse) Clone(other *Horse) {
 	h.Line = other.Line
 }
 
-func (h Horse) Letter() string {
+func (h *Horse) Letter() string {
 	return fmt.Sprintf("%c", h.Name[0])
 }
 
-func (h Horse) IsFound() bool {
+func (h *Horse) IsFound() bool {
 	return h.Name != ""
 }
 
-func (h Horse) String() string {
+func (h *Horse) String() string {
 	return fmt.Sprintf("%s (line:%d)", h.Name, h.Line)
 }
