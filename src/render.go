@@ -8,22 +8,22 @@ import (
 	"time"
 )
 
-const renderDelay = 350
+const renderDelay = 200
 
 func RenderGame(board [][]*Horse) {
 	go func() {
 		for {
 			time.Sleep(renderDelay * time.Millisecond)
-			RenderRaceBoard(board)
+			RenderRaceBoard(board, nil)
 		}
 	}()
 }
 
-func RenderRaceBoard(board [][]*Horse) {
+func RenderRaceBoard(board [][]*Horse, winner *Horse) {
 	var buffer bytes.Buffer
 	buffer.WriteString("\n")
 	for line := range board {
-		renderRaceLine(board, line, &buffer)
+		renderRaceLine(board, line, &buffer, winner)
 	}
 	clearScreen()
 	fmt.Println(buffer.String())
@@ -35,14 +35,20 @@ func clearScreen() {
 	cmd.Run()
 }
 
-func renderRaceLine(board [][]*Horse, line int, buffer *bytes.Buffer) {
+func renderRaceLine(
+	board [][]*Horse,
+	line int,
+	buffer *bytes.Buffer,
+	winner *Horse,
+) {
 	buffer.WriteString(fmt.Sprintf(" %.2d | ", line))
 	var current Horse
 	for col := range board[line] {
-		renderRacePosition(board, line, col, &current, buffer)
+		renderRacePosition(board, line, col, &current, buffer, winner)
 	}
 	buffer.WriteString(fmt.Sprintf("| %s", current.Name))
-	if current.IsWinner {
+
+	if winner != nil && current.Name == winner.Name {
 		buffer.WriteString(" [Won!]")
 	}
 	buffer.WriteString("\n")
@@ -53,6 +59,7 @@ func renderRacePosition(
 	line, col int,
 	current *Horse,
 	buffer *bytes.Buffer,
+	winner *Horse,
 ) {
 	if board[line][col] == nil {
 		buffer.WriteString(" ")
@@ -60,12 +67,14 @@ func renderRacePosition(
 	}
 
 	current.Clone(board[line][col])
-	if current.IsWinner {
+
+	if winner != nil && current.Name == winner.Name {
 		removeChars(buffer, current.Position+1)
 		for range board[line] {
 			buffer.WriteString("-")
 		}
 	}
+
 	buffer.WriteString(current.Letter())
 }
 
