@@ -29,14 +29,12 @@ type Horse struct {
 	Name     string // The name of the horse
 	Line     int    // The competition line
 	Position int    // The position in its line
-	IsWinner bool   // A flag to know if it's the winner
 }
 
 func (h *Horse) Clone(other *Horse) {
 	h.Name = other.Name
 	h.Line = other.Line
 	h.Position = other.Position
-	h.IsWinner = other.IsWinner
 }
 
 func (h Horse) Letter() string {

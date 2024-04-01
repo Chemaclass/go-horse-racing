@@ -10,7 +10,6 @@ func NewRaceBoard(lines, lineLength int) [][]*Horse {
 			Name:     generateHorseName(),
 			Position: 0,
 			Line:     line,
-			IsWinner: false,
 		}
 	}
 	return board
