@@ -22,7 +22,7 @@ func main() {
 	winnerChan := make(chan Horse)
 	for line := range board {
 		// each horse will be moved in different processes
-		go startRuningHorseInLine(board, line, winnerChan)
+		go startRunningHorseInLine(board, line, winnerChan)
 	}
 
 	winner := <-winnerChan // wait until one horse reaches the end
@@ -30,10 +30,10 @@ func main() {
 	RenderRaceBoard(board, &winner)
 
 	fmt.Println("Race finished!")
-	fmt.Printf("# Winner: %s\n", winner)
+	fmt.Printf("# Winner: %s\n", winner.Name)
 }
 
-func startRuningHorseInLine(board [][]*Horse, line int, winnerChan chan Horse) {
+func startRunningHorseInLine(board [][]*Horse, line int, winnerChan chan Horse) {
 	for {
 		select {
 		case <-winnerChan: // check if another horse finished
