@@ -30,7 +30,7 @@ func main() {
 	RenderRaceBoard(board, &winner)
 
 	fmt.Println("Race finished!")
-	fmt.Printf("# Winner: %s\n", winner)
+	fmt.Printf("# Winner: %s\n", winner.Name)
 }
 
 func startRuningHorseInLine(board [][]*Horse, line int, winnerChan chan Horse) {
