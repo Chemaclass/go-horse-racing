@@ -44,7 +44,10 @@ func renderRaceLine(
 	buffer.WriteString(fmt.Sprintf(" %.2d | ", line))
 	var current Horse
 	for col := range board[line] {
-		renderRacePosition(board, line, col, &current, buffer, winner)
+		h := renderRacePosition(board, line, col, buffer, winner)
+		if h != nil {
+			current = *h
+		}
 	}
 	buffer.WriteString(fmt.Sprintf("| %s", current.Name))
 
@@ -57,16 +60,15 @@ func renderRaceLine(
 func renderRacePosition(
 	board [][]*Horse,
 	line, col int,
-	current *Horse,
 	buffer *bytes.Buffer,
 	winner *Horse,
-) {
+) *Horse {
 	if board[line][col] == nil {
 		buffer.WriteString(" ")
-		return
+		return nil
 	}
 
-	current.Clone(board[line][col])
+	current := board[line][col]
 
 	if winner != nil && current.Name == winner.Name {
 		removeChars(buffer, col+1)
@@ -76,6 +78,8 @@ func renderRacePosition(
 	}
 
 	buffer.WriteString(current.Letter())
+
+	return current
 }
 
 func removeChars(buffer *bytes.Buffer, n int) {

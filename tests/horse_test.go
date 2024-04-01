@@ -22,34 +22,6 @@ func setUp() {
 	}
 }
 
-func TestHorseCloneName(t *testing.T) {
-	h := Horse{}
-
-	if h.Name == horse.Name {
-		t.Error("Name should not be the same")
-	}
-
-	h.Clone(horse)
-
-	if h.Name != horse.Name {
-		t.Error("Name should be the same")
-	}
-}
-
-func TestHorseCloneLine(t *testing.T) {
-	h := Horse{}
-
-	if h.Line == horse.Line {
-		t.Error("Line should not be the same")
-	}
-
-	h.Clone(horse)
-
-	if h.Line != horse.Line {
-		t.Error("Line should be the same")
-	}
-}
-
 func TestHorseString(t *testing.T) {
 	if horse.String() != "Spirit (line:2)" {
 		t.Error("String() not working")

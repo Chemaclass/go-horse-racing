@@ -30,11 +30,6 @@ type Horse struct {
 	Line int    // The competition line
 }
 
-func (h *Horse) Clone(other *Horse) {
-	h.Name = other.Name
-	h.Line = other.Line
-}
-
 func (h *Horse) Letter() string {
 	return fmt.Sprintf("%c", h.Name[0])
 }
