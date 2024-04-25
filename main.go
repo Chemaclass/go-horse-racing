@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-
-	. "github.com/Chemaclass/go-horse-racing/src"
 )
 
 const maxSleepDelay = 300
